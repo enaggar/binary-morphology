@@ -27,24 +27,6 @@ if(NOT CMAKE_INSTALL_COMPONENT)
   endif()
 endif()
 
-if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Runtime")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin/ITKExamples/Filtering/ImageGradient" TYPE EXECUTABLE FILES "/Users/enaggar/Documents/binary-morphology/build/ApplyGradientRecursiveGaussianImageFilter")
-  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/ITKExamples/Filtering/ImageGradient/ApplyGradientRecursiveGaussianImageFilter" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/ITKExamples/Filtering/ImageGradient/ApplyGradientRecursiveGaussianImageFilter")
-    if(CMAKE_INSTALL_DO_STRIP)
-      execute_process(COMMAND "/Library/Developer/CommandLineTools/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/ITKExamples/Filtering/ImageGradient/ApplyGradientRecursiveGaussianImageFilter")
-    endif()
-  endif()
-endif()
-
-if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Code")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ITKExamples/Code/Filtering/ImageGradient/ApplyGradientRecursiveGaussianImageFilter" TYPE FILE FILES
-    "/Users/enaggar/Documents/binary-morphology/binaryMorphologyPostProcess.cxx"
-    "/Users/enaggar/Documents/binary-morphology/CMakeLists.txt"
-    "/Users/enaggar/Documents/binary-morphology/Code.py"
-    )
-endif()
-
 if(CMAKE_INSTALL_COMPONENT)
   set(CMAKE_INSTALL_MANIFEST "install_manifest_${CMAKE_INSTALL_COMPONENT}.txt")
 else()

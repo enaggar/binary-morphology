@@ -3,13 +3,10 @@
 #include "itkBinaryBallStructuringElement.h"
 #include "itkSubtractImageFilter.h"
 
-//#include "QuickView.h" /*Need VTK*/
-
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"
 #include "itkRescaleIntensityImageFilter.h"
 
-#include "itkConstNeighborhoodIterator.h"
 #include "itkImageRegionIterator.h"
 
 //namespace {
@@ -17,10 +14,13 @@
 //}
 
 typedef float															PixelType;
-typedef itk::Image<PixelType, 2> 					ImageType;
+typedef itk::Image<PixelType, 3> 					ImageType;
 typedef itk::ImageFileReader<ImageType> 	ReaderType;
 
-typedef itk::ConstNeighborhoodIterator< ImageType >	NeighborhoodIteratorType;
+typedef float 																	WritePixelType;
+typedef itk::Image<WritePixelType, 3>						WriteImageType;
+typedef itk::ImageFileWriter<WriteImageType>	WriterType;
+
 typedef itk::ImageRegionIterator< ImageType>				IteratorType; 
 
 /*
@@ -57,10 +57,9 @@ int main (int argc, char ** argv) {
 		return EXIT_FAILURE;
 	}
 
-	NeighborhoodIteratorType::RadiusType iterator_radius;
-	iterator_radius.Fill (1);
-	NeighborhoodIteratorType it(
-		iterator_radius,
+	printf ("%s %s %d\n", argv[1], argv[2], structure_radius);
+
+	IteratorType it(
 		reader->GetOutput(),
 		reader->GetOutput()->GetRequestedRegion()
 		);
@@ -71,19 +70,30 @@ int main (int argc, char ** argv) {
 
 	IteratorType bin(binary_image, reader->GetOutput()->GetRequestedRegion());	
 
+	char line[20];
+	int read = 0;
+	int empty = 0;
+	float val = 0;
 	for (it.GoToBegin(), bin.GoToBegin();!it.IsAtEnd();++it, ++bin) {
-		/*
-		int label;
-		fscanf (label_file, "%d", &label);
-		*/
-		if (true/*label*/) {
-			bin.Set(50);
+		float cur_pixel = it.Get();
+		if (fabs(cur_pixel-255.000) <= 1e-5) {
+			read ++;
+			fgets (line, 20, label_file);
+			int label;
+			sscanf (line, "lable%d", &label);
+			if (label) {
+				bin.Set(50);
+			} else {
+				continue;
+			}
 		} else {
-			continue;
+			val += cur_pixel;
+			empty ++;
 		}
 	}
+	printf ("%d Pixels read, %d empty with val %f\n", read, empty, val);
 
-	typedef itk::BinaryBallStructuringElement<PixelType, 2> StructuringElementType;
+	typedef itk::BinaryBallStructuringElement<PixelType, 3> StructuringElementType;
 	StructuringElementType structuringElement;
 	structuringElement.SetRadius(structure_radius);
 	structuringElement.CreateStructuringElement();
@@ -101,25 +111,39 @@ int main (int argc, char ** argv) {
 	diff->SetInput1(binary_image);
 	diff->SetInput2(openingFilter->GetOutput());
 
-	/*QuickView viewer;
-	std::stringstream desc;
-	desc << "Original ";
-	viewer.AddImage(binary_image.GetPointer(),
-									true,
-									desc.str());
+	WriterType::Pointer writer = WriterType::New();
+	writer->SetFileName("binary_image.mha");
+	writer->SetInput(binary_image);
+	try {
+		writer->Update();
+	} catch (itk::ExceptionObject &err){
+		std::cerr << "ExceptionObject caught !" << std::endl;
+		std::cerr << err << std::endl;
+		return EXIT_FAILURE;
+	}
 
-	std::stringstream desc2;
-	desc2 << "BinaryOpenining, radius = " << structure_radius;
-	viewer.AddImage(openingFilter->GetOutput().
-									true,
-									desc2.str());
+	writer = WriterType::New();
+	writer->SetFileName("filtered_image.mha");
+	writer->SetInput(openingFilter->GetOutput());
+	try {
+		writer->Update();
+	} catch (itk::ExceptionObject &err){
+		std::cerr << "ExceptionObject caught!" << std::endl;
+		std::cerr << err << std::endl;
+		return EXIT_FAILURE;
+	}
 
-	std::stringstream desc3;
-	desc3 << "Original - BinaryOpening";
-	viewer.AddImage(diff->GetOutput(),
-									true,
-									desc3.str());
-	viewer.Visualize();*/
+	writer = WriterType::New();
+	writer->SetFileName("difference.mha");
+	writer->SetInput(diff->GetOutput());
+	try {
+		writer->Update();
+	} catch (itk::ExceptionObject &err) {
+		std::cerr << "ExceptionObject caught!" << std::endl;
+		std::cerr << err << std::endl;
+		return EXIT_FAILURE;
+	}
+
 
 	return EXIT_SUCCESS;
 }

@@ -60,39 +60,39 @@ CMAKE_SOURCE_DIR = /Users/enaggar/Documents/binary-morphology
 CMAKE_BINARY_DIR = /Users/enaggar/Documents/binary-morphology/build
 
 #=============================================================================
-# Target rules for target CMakeFiles/ApplyGradientRecursiveGaussianImageFilter.dir
+# Target rules for target CMakeFiles/binaryMorphologyPostProcess.dir
 
 # All Build rule for target.
-CMakeFiles/ApplyGradientRecursiveGaussianImageFilter.dir/all:
-	$(MAKE) -f CMakeFiles/ApplyGradientRecursiveGaussianImageFilter.dir/build.make CMakeFiles/ApplyGradientRecursiveGaussianImageFilter.dir/depend
-	$(MAKE) -f CMakeFiles/ApplyGradientRecursiveGaussianImageFilter.dir/build.make CMakeFiles/ApplyGradientRecursiveGaussianImageFilter.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/enaggar/Documents/binary-morphology/build/CMakeFiles --progress-num=1,2 "Built target ApplyGradientRecursiveGaussianImageFilter"
-.PHONY : CMakeFiles/ApplyGradientRecursiveGaussianImageFilter.dir/all
+CMakeFiles/binaryMorphologyPostProcess.dir/all:
+	$(MAKE) -f CMakeFiles/binaryMorphologyPostProcess.dir/build.make CMakeFiles/binaryMorphologyPostProcess.dir/depend
+	$(MAKE) -f CMakeFiles/binaryMorphologyPostProcess.dir/build.make CMakeFiles/binaryMorphologyPostProcess.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/enaggar/Documents/binary-morphology/build/CMakeFiles --progress-num=1,2 "Built target binaryMorphologyPostProcess"
+.PHONY : CMakeFiles/binaryMorphologyPostProcess.dir/all
 
 # Include target in all.
-all: CMakeFiles/ApplyGradientRecursiveGaussianImageFilter.dir/all
+all: CMakeFiles/binaryMorphologyPostProcess.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/ApplyGradientRecursiveGaussianImageFilter.dir/rule: cmake_check_build_system
+CMakeFiles/binaryMorphologyPostProcess.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/enaggar/Documents/binary-morphology/build/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/ApplyGradientRecursiveGaussianImageFilter.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/binaryMorphologyPostProcess.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/enaggar/Documents/binary-morphology/build/CMakeFiles 0
-.PHONY : CMakeFiles/ApplyGradientRecursiveGaussianImageFilter.dir/rule
+.PHONY : CMakeFiles/binaryMorphologyPostProcess.dir/rule
 
 # Convenience name for target.
-ApplyGradientRecursiveGaussianImageFilter: CMakeFiles/ApplyGradientRecursiveGaussianImageFilter.dir/rule
+binaryMorphologyPostProcess: CMakeFiles/binaryMorphologyPostProcess.dir/rule
 
-.PHONY : ApplyGradientRecursiveGaussianImageFilter
-
-# clean rule for target.
-CMakeFiles/ApplyGradientRecursiveGaussianImageFilter.dir/clean:
-	$(MAKE) -f CMakeFiles/ApplyGradientRecursiveGaussianImageFilter.dir/build.make CMakeFiles/ApplyGradientRecursiveGaussianImageFilter.dir/clean
-.PHONY : CMakeFiles/ApplyGradientRecursiveGaussianImageFilter.dir/clean
+.PHONY : binaryMorphologyPostProcess
 
 # clean rule for target.
-clean: CMakeFiles/ApplyGradientRecursiveGaussianImageFilter.dir/clean
+CMakeFiles/binaryMorphologyPostProcess.dir/clean:
+	$(MAKE) -f CMakeFiles/binaryMorphologyPostProcess.dir/build.make CMakeFiles/binaryMorphologyPostProcess.dir/clean
+.PHONY : CMakeFiles/binaryMorphologyPostProcess.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/binaryMorphologyPostProcess.dir/clean
 
 .PHONY : clean
 

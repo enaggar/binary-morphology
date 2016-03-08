@@ -78,61 +78,6 @@ rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
 
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Code\" \"Runtime\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-
-.PHONY : list_install_components/fast
-
-# Special rule for the target install
-install: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/local/Cellar/cmake/3.4.3/bin/cmake -P cmake_install.cmake
-.PHONY : install
-
-# Special rule for the target install
-install/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/local/Cellar/cmake/3.4.3/bin/cmake -P cmake_install.cmake
-.PHONY : install/fast
-
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/local/Cellar/cmake/3.4.3/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
-
-# Special rule for the target install/strip
-install/strip/fast: install/strip
-
-.PHONY : install/strip/fast
-
-# Special rule for the target test
-test:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/usr/local/Cellar/cmake/3.4.3/bin/ctest --force-new-ctest-process $(ARGS)
-.PHONY : test
-
-# Special rule for the target test
-test/fast: test
-
-.PHONY : test/fast
-
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/local/Cellar/cmake/3.4.3/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
-
-# Special rule for the target install/local
-install/local/fast: install/local
-
-.PHONY : install/local/fast
-
 # The main all target
 all: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/enaggar/Documents/binary-morphology/build/CMakeFiles /Users/enaggar/Documents/binary-morphology/build/CMakeFiles/progress.marks
@@ -166,17 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named ApplyGradientRecursiveGaussianImageFilter
+# Target rules for targets named binaryMorphologyPostProcess
 
 # Build rule for target.
-ApplyGradientRecursiveGaussianImageFilter: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 ApplyGradientRecursiveGaussianImageFilter
-.PHONY : ApplyGradientRecursiveGaussianImageFilter
+binaryMorphologyPostProcess: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 binaryMorphologyPostProcess
+.PHONY : binaryMorphologyPostProcess
 
 # fast build rule for target.
-ApplyGradientRecursiveGaussianImageFilter/fast:
-	$(MAKE) -f CMakeFiles/ApplyGradientRecursiveGaussianImageFilter.dir/build.make CMakeFiles/ApplyGradientRecursiveGaussianImageFilter.dir/build
-.PHONY : ApplyGradientRecursiveGaussianImageFilter/fast
+binaryMorphologyPostProcess/fast:
+	$(MAKE) -f CMakeFiles/binaryMorphologyPostProcess.dir/build.make CMakeFiles/binaryMorphologyPostProcess.dir/build
+.PHONY : binaryMorphologyPostProcess/fast
 
 binaryMorphologyPostProcess.o: binaryMorphologyPostProcess.cxx.o
 
@@ -184,7 +129,7 @@ binaryMorphologyPostProcess.o: binaryMorphologyPostProcess.cxx.o
 
 # target to build an object file
 binaryMorphologyPostProcess.cxx.o:
-	$(MAKE) -f CMakeFiles/ApplyGradientRecursiveGaussianImageFilter.dir/build.make CMakeFiles/ApplyGradientRecursiveGaussianImageFilter.dir/binaryMorphologyPostProcess.cxx.o
+	$(MAKE) -f CMakeFiles/binaryMorphologyPostProcess.dir/build.make CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o
 .PHONY : binaryMorphologyPostProcess.cxx.o
 
 binaryMorphologyPostProcess.i: binaryMorphologyPostProcess.cxx.i
@@ -193,7 +138,7 @@ binaryMorphologyPostProcess.i: binaryMorphologyPostProcess.cxx.i
 
 # target to preprocess a source file
 binaryMorphologyPostProcess.cxx.i:
-	$(MAKE) -f CMakeFiles/ApplyGradientRecursiveGaussianImageFilter.dir/build.make CMakeFiles/ApplyGradientRecursiveGaussianImageFilter.dir/binaryMorphologyPostProcess.cxx.i
+	$(MAKE) -f CMakeFiles/binaryMorphologyPostProcess.dir/build.make CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.i
 .PHONY : binaryMorphologyPostProcess.cxx.i
 
 binaryMorphologyPostProcess.s: binaryMorphologyPostProcess.cxx.s
@@ -202,7 +147,7 @@ binaryMorphologyPostProcess.s: binaryMorphologyPostProcess.cxx.s
 
 # target to generate assembly for a file
 binaryMorphologyPostProcess.cxx.s:
-	$(MAKE) -f CMakeFiles/ApplyGradientRecursiveGaussianImageFilter.dir/build.make CMakeFiles/ApplyGradientRecursiveGaussianImageFilter.dir/binaryMorphologyPostProcess.cxx.s
+	$(MAKE) -f CMakeFiles/binaryMorphologyPostProcess.dir/build.make CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.s
 .PHONY : binaryMorphologyPostProcess.cxx.s
 
 # Help Target
@@ -213,12 +158,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... list_install_components"
-	@echo "... install"
-	@echo "... install/strip"
-	@echo "... test"
-	@echo "... install/local"
-	@echo "... ApplyGradientRecursiveGaussianImageFilter"
+	@echo "... binaryMorphologyPostProcess"
 	@echo "... binaryMorphologyPostProcess.o"
 	@echo "... binaryMorphologyPostProcess.i"
 	@echo "... binaryMorphologyPostProcess.s"
