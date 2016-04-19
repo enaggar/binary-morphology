@@ -62,13 +62,16 @@ int main (int argc, char ** argv) {
 	IteratorType it(
 		reader->GetOutput(),
 		reader->GetOutput()->GetRequestedRegion()
-		);
+	);
 
 	ImageType::Pointer binary_image = ImageType::New();
 	binary_image->SetRegions(reader->GetOutput()->GetRequestedRegion());
 	binary_image->Allocate();
 
-	IteratorType bin(binary_image, reader->GetOutput()->GetRequestedRegion());	
+	IteratorType bin(
+		binary_image,
+		reader->GetOutput()->GetRequestedRegion()
+	);	
 
 	char line[20];
 	int read = 0;
@@ -82,7 +85,7 @@ int main (int argc, char ** argv) {
 			int label;
 			sscanf (line, "lable%d", &label);
 			if (label) {
-				bin.Set(50);
+				bin.Set(255);
 			} else {
 				continue;
 			}
@@ -92,6 +95,7 @@ int main (int argc, char ** argv) {
 		}
 	}
 	printf ("%d Pixels read, %d empty with val %f\n", read, empty, val);
+	fclose (label_file);
 
 	typedef itk::BinaryBallStructuringElement<PixelType, 3> StructuringElementType;
 	StructuringElementType structuringElement;
@@ -144,6 +148,28 @@ int main (int argc, char ** argv) {
 		return EXIT_FAILURE;
 	}
 
+	IteratorType filtered_iterator(
+		openingFilter->GetOutput(),
+		reader->GetOutput()->GetRequestedRegion()
+	);
+
+	label_file = fopen (argv[2], "r");
+	new_file = fopen ("new_label.txt", "w");
+
+	for (it.GoToBegin(), filtered_iterator.GoToBegin();!it.IsAtEnd();++it, ++filtered_iterator) {
+		float cur_pixel = it.Get();
+		if (fabs(cur_pixel-255.000) <= 1e-5) {
+			fgets (line, 20, label_file);
+			int label;
+			sscanf (line, "lable%d", &label);
+			float cur_filtered = filtered_iterator->Get();
+			if (fabs(cur_filtered-255.000) <= 1e-5) {
+				fprintf (new_file, "label%d\n", label);
+			}
+		}
+	}
+
+	printf ("New label file created\n");
 
 	return EXIT_SUCCESS;
 }
