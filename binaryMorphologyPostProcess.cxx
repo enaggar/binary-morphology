@@ -13,11 +13,11 @@
 //	typedef itk::Image<unsigned char, 2> ImageType;
 //}
 
-typedef float															PixelType;
+typedef unsigned char											PixelType;
 typedef itk::Image<PixelType, 3> 					ImageType;
 typedef itk::ImageFileReader<ImageType> 	ReaderType;
 
-typedef float 																	WritePixelType;
+typedef unsigned char											WritePixelType;
 typedef itk::Image<WritePixelType, 3>						WriteImageType;
 typedef itk::ImageFileWriter<WriteImageType>	WriterType;
 
@@ -78,17 +78,22 @@ int main (int argc, char ** argv) {
 	int empty = 0;
 	float val = 0;
 	for (it.GoToBegin(), bin.GoToBegin();!it.IsAtEnd();++it, ++bin) {
-		float cur_pixel = it.Get();
+		PixelType cur_pixel = it.Get();
 		int pred, real;
-		fgets (line, 20, lable_file);
-		sscanf (line, "lable%d lable%d", &pred, &real);
-		if (pred != 0) {
-			read ++;
-			bin.Set(255);
-		} else {
-			bin.Set(0);
-			val += cur_pixel;
-			empty ++;
+		if (cur_pixel == 255) {
+			fgets (line, 20, lable_file);
+			int succ = sscanf (line, "lable%d lable%d", &pred, &real);
+			if (succ != 2) {
+				printf ("ERROR\n");
+			}
+			if (pred != 0) {
+				read ++;
+				bin.Set(255);
+			} else {
+				bin.Set(0);
+				val += cur_pixel;
+				empty ++;
+			}
 		}
 	}
 	printf ("%d Pixels read, %d empty with val %f\n", read, empty, val);
@@ -99,18 +104,18 @@ int main (int argc, char ** argv) {
 	structuringElement.SetRadius(structure_radius);
 	structuringElement.CreateStructuringElement();
 
-	typedef itk::BinaryMorphologicalClosingImageFilter <ImageType, ImageType, StructuringElementType>
-					BinaryMorphologicalClosingImageFilterType;
-	BinaryMorphologicalClosingImageFilterType::Pointer closingFilter
-					= BinaryMorphologicalClosingImageFilterType::New();
-	closignFilter->SetInput(binary_image);
-	closingFilter->SetKernel(structuringElement);
-	closingFilter->Update();
+	typedef itk::BinaryMorphologicalOpeningImageFilter <ImageType, ImageType, StructuringElementType>
+					BinaryMorphologicalOpeningImageFilterType;
+	BinaryMorphologicalOpeningImageFilterType::Pointer openingFilter
+					= BinaryMorphologicalOpeningImageFilterType::New();
+	openingFilter->SetInput(binary_image);
+	openingFilter->SetKernel(structuringElement);
+	openingFilter->Update();
 
 	typedef itk::SubtractImageFilter<ImageType> SubtractType;
 	SubtractType::Pointer diff = SubtractType::New();
 	diff->SetInput1(binary_image);
-	diff->SetInput2(closingFilter->GetOutput());
+	diff->SetInput2(openingFilter->GetOutput());
 
 	WriterType::Pointer writer = WriterType::New();
 	writer->SetFileName("binary_image.mha");
@@ -125,7 +130,7 @@ int main (int argc, char ** argv) {
 
 	writer = WriterType::New();
 	writer->SetFileName("filtered_image.mha");
-	writer->SetInput(closingFilter->GetOutput());
+	writer->SetInput(openingFilter->GetOutput());
 	try {
 		writer->Update();
 	} catch (itk::ExceptionObject &err){
@@ -146,25 +151,31 @@ int main (int argc, char ** argv) {
 	}
 
 	IteratorType filtered_iterator(
-		closingFilter->GetOutput(),
+		openingFilter->GetOutput(),
 		reader->GetOutput()->GetRequestedRegion()
 	);
 
 	lable_file = fopen (argv[2], "r");
-	new_file = fopen ("new_lable.txt", "w");
+	FILE *new_file = fopen ("new_lable.txt", "w");
 
+	int x_count = 0;
 	for (it.GoToBegin(), filtered_iterator.GoToBegin();!it.IsAtEnd();++it, ++filtered_iterator) {
-		float cur_pixel = filtered_iterator.Get();
-		fgets (line, 20, lable_file);
-		int pred, real;
-		sscanf (line, "lable%d lable%d", &pred, &real);
-		if (fabs(cur_pixel-255.000) <= 1e-5) {
-			fprintf (new_file, "lable%d lable%d\n", pred, real);
-		} else {
-			fprintf (new_file, "lable0 lable%d\n", real);
+		PixelType cur_pixel = filtered_iterator.Get();
+		PixelType ori_pixel = it.Get();
+		if (ori_pixel == 255) {
+			fgets (line, 20, lable_file);
+			int pred, real;
+			sscanf (line, "lable%d lable%d", &pred, &real);
+			if (fabs(cur_pixel-255.000) <= 1e-5) {
+				fprintf (new_file, "lable%d lable%d\n", pred, real);
+			} else {
+				x_count ++;
+				fprintf (new_file, "lable0 lable%d\n", real);
+			}
 		}
 	}
 
+	printf ("%d voxels modified\n", x_count);
 	printf ("New lable file created\n");
 
 	return EXIT_SUCCESS;
