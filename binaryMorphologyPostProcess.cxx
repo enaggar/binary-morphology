@@ -25,7 +25,7 @@ typedef itk::ImageRegionIterator< ImageType>				IteratorType;
 
 /*
 arg1 --> Itk Image File
-arg2 --> Label File
+arg2 --> Lable File
 arg3 --> radius size
 */
 int main (int argc, char ** argv) {
@@ -45,9 +45,9 @@ int main (int argc, char ** argv) {
 		return EXIT_FAILURE;
 	}
 
-	FILE *label_file = fopen (argv[2], "r");
-	if (label_file == NULL) {
-		std::cerr << "Label File Not Found\n";
+	FILE *lable_file = fopen (argv[2], "r");
+	if (lable_file == NULL) {
+		std::cerr << "lable File Not Found\n";
 		return EXIT_FAILURE;
 	}
 
@@ -79,41 +79,38 @@ int main (int argc, char ** argv) {
 	float val = 0;
 	for (it.GoToBegin(), bin.GoToBegin();!it.IsAtEnd();++it, ++bin) {
 		float cur_pixel = it.Get();
-		if (fabs(cur_pixel-255.000) <= 1e-5) {
+		int pred, real;
+		fgets (line, 20, lable_file);
+		sscanf (line, "lable%d lable%d", &pred, &real);
+		if (pred != 0) {
 			read ++;
-			fgets (line, 20, label_file);
-			int label;
-			sscanf (line, "lable%d", &label);
-			if (label) {
-				bin.Set(255);
-			} else {
-				continue;
-			}
+			bin.Set(255);
 		} else {
+			bin.Set(0);
 			val += cur_pixel;
 			empty ++;
 		}
 	}
 	printf ("%d Pixels read, %d empty with val %f\n", read, empty, val);
-	fclose (label_file);
+	fclose (lable_file);
 
 	typedef itk::BinaryBallStructuringElement<PixelType, 3> StructuringElementType;
 	StructuringElementType structuringElement;
 	structuringElement.SetRadius(structure_radius);
 	structuringElement.CreateStructuringElement();
 
-	typedef itk::BinaryMorphologicalOpeningImageFilter <ImageType, ImageType, StructuringElementType>
-					BinaryMorphologicalOpeningImageFilterType;
-	BinaryMorphologicalOpeningImageFilterType::Pointer openingFilter
-					= BinaryMorphologicalOpeningImageFilterType::New();
-	openingFilter->SetInput(binary_image);
-	openingFilter->SetKernel(structuringElement);
-	openingFilter->Update();
+	typedef itk::BinaryMorphologicalClosingImageFilter <ImageType, ImageType, StructuringElementType>
+					BinaryMorphologicalClosingImageFilterType;
+	BinaryMorphologicalClosingImageFilterType::Pointer closingFilter
+					= BinaryMorphologicalClosingImageFilterType::New();
+	closignFilter->SetInput(binary_image);
+	closingFilter->SetKernel(structuringElement);
+	closingFilter->Update();
 
 	typedef itk::SubtractImageFilter<ImageType> SubtractType;
 	SubtractType::Pointer diff = SubtractType::New();
 	diff->SetInput1(binary_image);
-	diff->SetInput2(openingFilter->GetOutput());
+	diff->SetInput2(closingFilter->GetOutput());
 
 	WriterType::Pointer writer = WriterType::New();
 	writer->SetFileName("binary_image.mha");
@@ -128,7 +125,7 @@ int main (int argc, char ** argv) {
 
 	writer = WriterType::New();
 	writer->SetFileName("filtered_image.mha");
-	writer->SetInput(openingFilter->GetOutput());
+	writer->SetInput(closingFilter->GetOutput());
 	try {
 		writer->Update();
 	} catch (itk::ExceptionObject &err){
@@ -149,27 +146,26 @@ int main (int argc, char ** argv) {
 	}
 
 	IteratorType filtered_iterator(
-		openingFilter->GetOutput(),
+		closingFilter->GetOutput(),
 		reader->GetOutput()->GetRequestedRegion()
 	);
 
-	label_file = fopen (argv[2], "r");
-	new_file = fopen ("new_label.txt", "w");
+	lable_file = fopen (argv[2], "r");
+	new_file = fopen ("new_lable.txt", "w");
 
 	for (it.GoToBegin(), filtered_iterator.GoToBegin();!it.IsAtEnd();++it, ++filtered_iterator) {
-		float cur_pixel = it.Get();
+		float cur_pixel = filtered_iterator.Get();
+		fgets (line, 20, lable_file);
+		int pred, real;
+		sscanf (line, "lable%d lable%d", &pred, &real);
 		if (fabs(cur_pixel-255.000) <= 1e-5) {
-			fgets (line, 20, label_file);
-			int label;
-			sscanf (line, "lable%d", &label);
-			float cur_filtered = filtered_iterator->Get();
-			if (fabs(cur_filtered-255.000) <= 1e-5) {
-				fprintf (new_file, "label%d\n", label);
-			}
+			fprintf (new_file, "lable%d lable%d\n", pred, real);
+		} else {
+			fprintf (new_file, "lable0 lable%d\n", real);
 		}
 	}
 
-	printf ("New label file created\n");
+	printf ("New lable file created\n");
 
 	return EXIT_SUCCESS;
 }
