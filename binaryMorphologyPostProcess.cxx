@@ -25,12 +25,11 @@ typedef itk::ImageRegionIterator< ImageType>				IteratorType;
 
 /*
 arg1 --> Itk Image File
-arg2 --> Lable File
 arg3 --> radius size
 */
 int main (int argc, char ** argv) {
 
-	if (argc < 4) {
+	if (argc < 3) {
 		std::cerr << "Missing Arguments\n";
 		return EXIT_FAILURE;
 	}
@@ -45,19 +44,13 @@ int main (int argc, char ** argv) {
 		return EXIT_FAILURE;
 	}
 
-	FILE *lable_file = fopen (argv[2], "r");
-	if (lable_file == NULL) {
-		std::cerr << "lable File Not Found\n";
-		return EXIT_FAILURE;
-	}
-
 	int structure_radius;
-	if (!sscanf (argv[3], "%d", &structure_radius)) {
+	if (!sscanf (argv[2], "%d", &structure_radius)) {
 		std::cerr << "Structure Element Radius not provided\n";
 		return EXIT_FAILURE;
 	}
 
-	printf ("%s %s %d\n", argv[1], argv[2], structure_radius);
+	printf ("%s %d\n", argv[1], structure_radius);
 
 	IteratorType it(
 		reader->GetOutput(),
@@ -80,24 +73,10 @@ int main (int argc, char ** argv) {
 	for (it.GoToBegin(), bin.GoToBegin();!it.IsAtEnd();++it, ++bin) {
 		PixelType cur_pixel = it.Get();
 		int pred, real;
-		if (cur_pixel == 255) {
-			fgets (line, 20, lable_file);
-			int succ = sscanf (line, "lable%d lable%d", &pred, &real);
-			if (succ != 2) {
-				printf ("ERROR\n");
-			}
-			if (pred != 0) {
-				read ++;
-				bin.Set(255);
-			} else {
-				bin.Set(0);
-				val += cur_pixel;
-				empty ++;
-			}
+		if (cur_pixel != 0) {
+			bin.Set(255);
 		}
 	}
-	printf ("%d Pixels read, %d empty with val %f\n", read, empty, val);
-	fclose (lable_file);
 
 	typedef itk::BinaryBallStructuringElement<PixelType, 3> StructuringElementType;
 	StructuringElementType structuringElement;
@@ -120,6 +99,7 @@ int main (int argc, char ** argv) {
 	WriterType::Pointer writer = WriterType::New();
 	writer->SetFileName("binary_image.mha");
 	writer->SetInput(binary_image);
+	writer->SetUseCompression(true);
 	try {
 		writer->Update();
 	} catch (itk::ExceptionObject &err){
@@ -131,6 +111,7 @@ int main (int argc, char ** argv) {
 	writer = WriterType::New();
 	writer->SetFileName("filtered_image.mha");
 	writer->SetInput(openingFilter->GetOutput());
+	writer->SetUseCompression(true);
 	try {
 		writer->Update();
 	} catch (itk::ExceptionObject &err){
@@ -142,6 +123,7 @@ int main (int argc, char ** argv) {
 	writer = WriterType::New();
 	writer->SetFileName("difference.mha");
 	writer->SetInput(diff->GetOutput());
+	writer->SetUseCompression(true);
 	try {
 		writer->Update();
 	} catch (itk::ExceptionObject &err) {
@@ -155,28 +137,40 @@ int main (int argc, char ** argv) {
 		reader->GetOutput()->GetRequestedRegion()
 	);
 
-	lable_file = fopen (argv[2], "r");
-	FILE *new_file = fopen ("new_lable.txt", "w");
+	ImageType::Pointer final_image = ImageType::New();
+	final_image->SetRegions(reader->GetOutput()->GetRequestedRegion());
+	final_image->Allocate();
 
-	int x_count = 0;
-	for (it.GoToBegin(), filtered_iterator.GoToBegin();!it.IsAtEnd();++it, ++filtered_iterator) {
+	IteratorType fin(
+		final_image,
+		reader->GetOutput()->GetRequestedRegion()
+	);	
+
+	for (it.GoToBegin(), filtered_iterator.GoToBegin(), fin.GoToBegin();!it.IsAtEnd();++it, ++filtered_iterator, ++fin) {
 		PixelType cur_pixel = filtered_iterator.Get();
 		PixelType ori_pixel = it.Get();
-		if (ori_pixel == 255) {
-			fgets (line, 20, lable_file);
-			int pred, real;
-			sscanf (line, "lable%d lable%d", &pred, &real);
-			if (fabs(cur_pixel-255.000) <= 1e-5) {
-				fprintf (new_file, "lable%d lable%d\n", pred, real);
-			} else {
-				x_count ++;
-				fprintf (new_file, "lable0 lable%d\n", real);
+		if (ori_pixel != 0) {
+			if (cur_pixel != 0) {
+				fin.Set(ori_pixel);
 			}
+		} else if (cur_pixel != 0) {
+			fin.Set(1);
+		} else {
+			fin.Set(0);
 		}
 	}
 
-	printf ("%d voxels modified\n", x_count);
-	printf ("New lable file created\n");
+	writer = WriterType::New();
+	writer->SetFileName("final_image.mha");
+	writer->SetInput(final_image);
+	writer->SetUseCompression(true);
+	try {
+		writer->Update();
+	} catch (itk::ExceptionObject &err){
+		std::cerr << "ExceptionObject caught!" << std::endl;
+		std::cerr << err << std::endl;
+		return EXIT_FAILURE;
+	}
 
 	return EXIT_SUCCESS;
 }
