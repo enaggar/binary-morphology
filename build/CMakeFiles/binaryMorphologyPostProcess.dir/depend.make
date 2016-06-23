@@ -51,6 +51,9 @@ CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /U
 CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkEnableIf.h
 CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkEventObject.h
 CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkExceptionObject.h
+CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkExtractImageFilter.h
+CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkExtractImageFilter.hxx
+CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkExtractImageFilterRegionCopier.h
 CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkFastMutexLock.h
 CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkFixedArray.h
 CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkFixedArray.hxx
@@ -84,6 +87,10 @@ CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /U
 CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkImageRegionConstIterator.hxx
 CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkImageRegionConstIteratorWithIndex.h
 CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkImageRegionConstIteratorWithIndex.hxx
+CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkImageRegionExclusionConstIteratorWithIndex.h
+CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkImageRegionExclusionConstIteratorWithIndex.hxx
+CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkImageRegionExclusionIteratorWithIndex.h
+CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkImageRegionExclusionIteratorWithIndex.hxx
 CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkImageRegionIterator.h
 CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkImageRegionIterator.hxx
 CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkImageRegionIteratorWithIndex.h
@@ -211,8 +218,8 @@ CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /U
 CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/BinaryMathematicalMorphology/include/itkBinaryDilateImageFilter.hxx
 CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/BinaryMathematicalMorphology/include/itkBinaryErodeImageFilter.h
 CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/BinaryMathematicalMorphology/include/itkBinaryErodeImageFilter.hxx
-CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/BinaryMathematicalMorphology/include/itkBinaryMorphologicalOpeningImageFilter.h
-CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/BinaryMathematicalMorphology/include/itkBinaryMorphologicalOpeningImageFilter.hxx
+CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/BinaryMathematicalMorphology/include/itkBinaryMorphologicalClosingImageFilter.h
+CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/BinaryMathematicalMorphology/include/itkBinaryMorphologicalClosingImageFilter.hxx
 CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/BinaryMathematicalMorphology/include/itkBinaryMorphologyImageFilter.h
 CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/BinaryMathematicalMorphology/include/itkBinaryMorphologyImageFilter.hxx
 CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/ImageFilterBase/include/itkBinaryFunctorImageFilter.h
@@ -223,6 +230,14 @@ CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /U
 CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/ImageFilterBase/include/itkCastImageFilter.hxx
 CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/ImageFilterBase/include/itkKernelImageFilter.h
 CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/ImageFilterBase/include/itkKernelImageFilter.hxx
+CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/ImageGrid/include/itkConstantPadImageFilter.h
+CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/ImageGrid/include/itkConstantPadImageFilter.hxx
+CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/ImageGrid/include/itkCropImageFilter.h
+CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/ImageGrid/include/itkCropImageFilter.hxx
+CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/ImageGrid/include/itkPadImageFilter.h
+CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/ImageGrid/include/itkPadImageFilter.hxx
+CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/ImageGrid/include/itkPadImageFilterBase.h
+CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/ImageGrid/include/itkPadImageFilterBase.hxx
 CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/ImageIntensity/include/itkRescaleIntensityImageFilter.h
 CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/ImageIntensity/include/itkRescaleIntensityImageFilter.hxx
 CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o: /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/ImageIntensity/include/itkSubtractImageFilter.h

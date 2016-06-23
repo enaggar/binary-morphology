@@ -52,6 +52,9 @@ CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o
  /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkEnableIf.h
  /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkEventObject.h
  /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkExceptionObject.h
+ /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkExtractImageFilter.h
+ /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkExtractImageFilter.hxx
+ /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkExtractImageFilterRegionCopier.h
  /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkFastMutexLock.h
  /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkFixedArray.h
  /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkFixedArray.hxx
@@ -85,6 +88,10 @@ CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o
  /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkImageRegionConstIterator.hxx
  /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkImageRegionConstIteratorWithIndex.h
  /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkImageRegionConstIteratorWithIndex.hxx
+ /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkImageRegionExclusionConstIteratorWithIndex.h
+ /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkImageRegionExclusionConstIteratorWithIndex.hxx
+ /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkImageRegionExclusionIteratorWithIndex.h
+ /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkImageRegionExclusionIteratorWithIndex.hxx
  /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkImageRegionIterator.h
  /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkImageRegionIterator.hxx
  /Users/enaggar/Documents/antsbin/ITKv4/Modules/Core/Common/include/itkImageRegionIteratorWithIndex.h
@@ -212,8 +219,8 @@ CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o
  /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/BinaryMathematicalMorphology/include/itkBinaryDilateImageFilter.hxx
  /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/BinaryMathematicalMorphology/include/itkBinaryErodeImageFilter.h
  /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/BinaryMathematicalMorphology/include/itkBinaryErodeImageFilter.hxx
- /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/BinaryMathematicalMorphology/include/itkBinaryMorphologicalOpeningImageFilter.h
- /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/BinaryMathematicalMorphology/include/itkBinaryMorphologicalOpeningImageFilter.hxx
+ /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/BinaryMathematicalMorphology/include/itkBinaryMorphologicalClosingImageFilter.h
+ /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/BinaryMathematicalMorphology/include/itkBinaryMorphologicalClosingImageFilter.hxx
  /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/BinaryMathematicalMorphology/include/itkBinaryMorphologyImageFilter.h
  /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/BinaryMathematicalMorphology/include/itkBinaryMorphologyImageFilter.hxx
  /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/ImageFilterBase/include/itkBinaryFunctorImageFilter.h
@@ -224,6 +231,14 @@ CMakeFiles/binaryMorphologyPostProcess.dir/binaryMorphologyPostProcess.cxx.o
  /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/ImageFilterBase/include/itkCastImageFilter.hxx
  /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/ImageFilterBase/include/itkKernelImageFilter.h
  /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/ImageFilterBase/include/itkKernelImageFilter.hxx
+ /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/ImageGrid/include/itkConstantPadImageFilter.h
+ /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/ImageGrid/include/itkConstantPadImageFilter.hxx
+ /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/ImageGrid/include/itkCropImageFilter.h
+ /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/ImageGrid/include/itkCropImageFilter.hxx
+ /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/ImageGrid/include/itkPadImageFilter.h
+ /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/ImageGrid/include/itkPadImageFilter.hxx
+ /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/ImageGrid/include/itkPadImageFilterBase.h
+ /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/ImageGrid/include/itkPadImageFilterBase.hxx
  /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/ImageIntensity/include/itkRescaleIntensityImageFilter.h
  /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/ImageIntensity/include/itkRescaleIntensityImageFilter.hxx
  /Users/enaggar/Documents/antsbin/ITKv4/Modules/Filtering/ImageIntensity/include/itkSubtractImageFilter.h
